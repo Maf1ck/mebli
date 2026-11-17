@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Немає звʼязку · Кант</title>
+<style>
+  :root { --bg: #f4efe7; --ink: #221d18; --ink-2: #4d453d; --accent: #8a4b22; --accent-ink: #fff; color-scheme: light dark; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #15120f; --ink: #f1ebe3; --ink-2: #c3b8aa; --accent: #e0a77a; --accent-ink: #231409; } }
+  body { margin: 0; min-height: 100dvh; display: grid; place-items: center; padding: 16px; background: var(--bg); color: var(--ink); font: 16px/1.55 system-ui, sans-serif; text-align: center; }
+  main { max-width: 420px; display: grid; gap: 16px; justify-items: center; }
+  h1 { margin: 0; font-size: 28px; line-height: 1.15; }
+  p { margin: 0; color: var(--ink-2); }
+  button { min-height: 48px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 600; cursor: pointer; }
+  img { width: 72px; height: 72px; }
+</style>
+</head>
+<body>
+<main>
+  <img src="/icons/icon.svg" width="72" height="72" alt="Кант">
+
+  <h1>Немає підключення до інтернету</h1>
+  <p>Кошик і введені дані збережено в цьому браузері. Коли звʼязок повернеться, продовжите з того самого місця.</p>
+  <button type="button" onclick="location.reload()">Спробувати ще</button>
+</main>
+</body>
+</html>
