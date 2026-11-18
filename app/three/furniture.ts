@@ -194,7 +194,8 @@ function label(text: string, color: string, scale: number): Sprite {
   canvas.width = 256
   canvas.height = 80
   const ctx = canvas.getContext('2d')!
-  const light = new Color(color).getHSL({ h: 0, s: 0, l: 0 }).l > 0.5
+  // Lightness in sRGB: getHSL defaults to the linear working space, which reads light greys as dark.
+  const light = new Color(color).getHSL({ h: 0, s: 0, l: 0 }, SRGBColorSpace).l > 0.5
   ctx.fillStyle = light ? 'rgba(24, 19, 15, 0.82)' : 'rgba(255, 253, 249, 0.9)'
   ctx.beginPath()
   ctx.roundRect(14, 10, 228, 62, 31)
