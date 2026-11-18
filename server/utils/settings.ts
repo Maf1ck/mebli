@@ -1,6 +1,6 @@
 import type { z } from 'zod'
-import { DEFAULT_CHARACTERS, DEFAULT_COMPANY, DEFAULT_GAME, DEFAULT_PRICES } from '#shared/defaults'
-import { charactersSchema, companySchema, gameSchema, priceListSchema } from '#shared/schemas'
+import { DEFAULT_CHARACTERS, DEFAULT_COMPANY, DEFAULT_GAME, DEFAULT_NOTIFY, DEFAULT_PRICES } from '#shared/defaults'
+import { charactersSchema, companySchema, gameSchema, notifySchema, priceListSchema } from '#shared/schemas'
 import type { PublicSettings } from '#shared/types'
 
 export const SETTINGS = {
@@ -8,6 +8,8 @@ export const SETTINGS = {
   prices: { schema: priceListSchema, defaults: DEFAULT_PRICES },
   game: { schema: gameSchema, defaults: DEFAULT_GAME },
   characters: { schema: charactersSchema, defaults: DEFAULT_CHARACTERS },
+  /** Admin-only: never returned by getPublicSettings */
+  notify: { schema: notifySchema, defaults: DEFAULT_NOTIFY },
 } as const
 
 export type SettingsKey = keyof typeof SETTINGS

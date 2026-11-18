@@ -49,6 +49,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     databaseUrl: '',
     adminPassword: '',
+    /** NUXT_TELEGRAM_BOT_TOKEN — bot token from @BotFather, server-only */
+    telegramBotToken: '',
     secret: '',
     public: {
       siteUrl: '',

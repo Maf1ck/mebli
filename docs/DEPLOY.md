@@ -82,6 +82,13 @@ find /home/deploy/backups -name 'kant-mebli-*.tar.gz' -mtime +14 -delete
 
 Відновлення: зупинити сервіс → розпакувати архів у `DATA_DIR` → запустити.
 
+## Telegram-сповіщення (необовʼязково)
+
+1. У Telegram напишіть [@BotFather](https://t.me/BotFather) → `/newbot` → отримайте токен.
+2. Задайте змінну `NUXT_TELEGRAM_BOT_TOKEN` (Vercel → Settings → Environment Variables → Production, або в systemd/`.env` на VPS) і перезапустіть / перерозгорніть сайт.
+3. Напишіть боту `/start` (або додайте його в робочу групу).
+4. Кабінет → «Сповіщення» → «Знайти чат» → «Надіслати тест» → увімкніть «Надсилати нові заявки» → «Зберегти».
+
 ## Vercel
 
 1. Імпортуйте репозиторій. Налаштування збірки вже лежать у `vercel.json` (pnpm, `pnpm build`, регіон `fra1`, заголовки кешу для `/_nuxt` і `sw.js`). Preset Nitro `vercel` вмикається автоматично.

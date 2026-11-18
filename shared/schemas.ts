@@ -76,6 +76,12 @@ export const gameSchema = z.object({
   minNextOrder: z.number().int().min(0).max(1000000),
 })
 
+export const notifySchema = z.object({
+  enabled: z.boolean(),
+  telegramChatId: z.string().trim().regex(/^$|^-?\d{3,20}$|^@[A-Za-z0-9_]{5,32}$/, 'Chat id — число (для груп відʼємне) або @назва_каналу'),
+  includeContacts: z.boolean(),
+})
+
 export const charactersSchema = z.object({
   personality: z.enum(PERSONALITIES),
   faces: z.boolean(),

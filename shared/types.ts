@@ -137,6 +137,15 @@ export interface CharacterSettings {
   phrases: boolean
 }
 
+/** Owner notifications. Not part of the public settings: the chat id stays server-side. */
+export interface NotifySettings {
+  enabled: boolean
+  /** Telegram chat id (number, negative for groups) or @channel */
+  telegramChatId: string
+  /** Send phone and address in the message (otherwise only a link to the cabinet) */
+  includeContacts: boolean
+}
+
 export interface PublicSettings {
   company: CompanySettings
   prices: PriceList

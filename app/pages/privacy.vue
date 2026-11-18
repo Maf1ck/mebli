@@ -19,6 +19,10 @@ article.doc.container
   h2 Навіщо
   p Лише для обробки вашої заявки: дзвінок, замір, погодження проєкту й ціни, виготовлення, доставка й монтаж. Дані не продаємо й не передаємо третім особам для реклами.
 
+  template(v-if="notifyNote")
+    h2 Сповіщення власнику
+    p {{ notifyNote }}
+
   h2 Фото приміщення
   ul
     li Фото стискаємо й перекодовуємо на сервері, з них видаляються EXIF-метадані й геолокація.
@@ -56,7 +60,9 @@ const settings = useSettings()
 const company = computed(() => settings.value.company)
 const contacts = useContacts()
 const contactLine = computed(() => contacts.value.map((c) => `${c.label} ${c.value}`).join(', '))
-const updated = '17 листопада 2026'
+const updated = '18 листопада 2026'
+// Shown always: the owner may switch Telegram notifications on at any time.
+const notifyNote = 'Щоб швидко відповісти, майстерня може отримувати повідомлення про нову заявку в Telegram: імʼя, склад, суму, бажаний час, коментар, а також телефон і адресу. Фото в Telegram не надсилаються.'
 
 usePageSeo({ title: 'Політика конфіденційності', description: 'Які дані ми збираємо для заявки на меблі, як зберігаємо фото й як видалити дані за запитом.', path: '/privacy' })
 </script>

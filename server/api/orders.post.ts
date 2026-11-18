@@ -102,6 +102,22 @@ export default defineEventHandler(async (event) => {
     const existing = await db.query<{ public_token: string }>('SELECT public_token FROM orders WHERE idempotency_key = $1', [input.idempotencyKey])
     return { token: existing[0]?.public_token ?? '', duplicate: true }
   }
+  // Telegram notice to the owner (if configured). Awaited so serverless functions do not
+  // drop it; it has its own timeout and never fails the request.
+  await notifyNewOrder(event, {
+    id,
+    name: input.customer.name,
+    phone: input.customer.phone,
+    address: input.customer.address,
+    options: input.options,
+    items,
+    estimate,
+    preferredDate: input.preferredDate,
+    preferredTime: input.preferredTime,
+    comment: input.comment,
+    photoCount: tokens.length,
+  })
+
   setResponseStatus(event, 201)
   return { token: result, duplicate: false }
 })

@@ -292,6 +292,8 @@ function eventLabel(e: AdminOrderEvent): string {
       return `Видано бонус з гри: ${formatUah(Number(d.amount ?? 0))}`
     case 'bonus_status':
       return `Бонус: ${BONUS_LABELS[String(d.status)] ?? d.status}`
+    case 'telegram':
+      return d.ok ? 'Сповіщення надіслано в Telegram' : `Telegram: не надіслано (${String(d.error ?? 'помилка')})`
     default:
       return e.kind
   }

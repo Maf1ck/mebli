@@ -38,6 +38,7 @@ const tabs = [
   { to: '/admin/company', label: 'Майстерня' },
   { to: '/admin/game', label: 'Гра' },
   { to: '/admin/characters', label: 'Персонажі' },
+  { to: '/admin/notify', label: 'Сповіщення' },
   { to: '/admin/access', label: 'Доступ' },
 ]
 

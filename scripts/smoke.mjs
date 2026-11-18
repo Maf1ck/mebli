@@ -123,6 +123,12 @@ const anon = await call('/api/admin/orders')
 ok(anon.res.status === 401, 'admin API without session → 401')
 const anonPhoto = await call('/api/admin/photos/00000000-0000-0000-0000-000000000000')
 ok(anonPhoto.res.status === 401, 'photo without session → 401')
+const anonNotify = await call('/api/admin/notify')
+ok(anonNotify.res.status === 401, 'notification settings without session → 401')
+const anonTest = await call('/api/admin/notify/test', { method: 'POST', body: {} })
+ok(anonTest.res.status === 401, 'test notification without session → 401')
+const pubSettingsText = JSON.stringify(s.data)
+ok(!('notify' in s.data) && !pubSettingsText.includes('telegramChatId'), 'public settings do not expose the Telegram chat')
 
 const wrong = await call('/api/admin/login', { method: 'POST', body: { password: 'wrong-password' } })
 ok(wrong.res.status === 401, 'wrong password rejected')
@@ -143,6 +149,14 @@ ok(photo.res.headers.get('content-type') === 'image/webp', 'photo served as webp
 ok(!meta.exif, 'stored photo has no EXIF/GPS')
 ok((photo.res.headers.get('cache-control') ?? '').includes('no-store'), 'photo is not cacheable')
 
+const notifyInfo = await call('/api/admin/notify', { cookie })
+ok(notifyInfo.res.ok && typeof notifyInfo.data.configured === 'boolean' && notifyInfo.data.settings, 'owner reads notification settings', `configured=${notifyInfo.data.configured}`)
+const badChat = await call('/api/admin/settings/notify', { method: 'PUT', cookie, body: { enabled: true, telegramChatId: 'not a chat', includeContacts: true } })
+ok(badChat.res.status === 422, 'invalid chat id rejected')
+if (!notifyInfo.data.configured) {
+  const detectNoToken = await call('/api/admin/notify/detect', { method: 'POST', cookie })
+  ok(detectNoToken.res.status === 502, 'chat lookup without a bot token → clear error')
+}
 const agreeBad = await call(`/api/admin/orders/${mine.id}`, { method: 'PATCH', cookie, body: { status: 'agreed' } })
 ok(agreeBad.res.status === 422, '"agreed" without price and production time rejected')
 const measureBad = await call(`/api/admin/orders/${mine.id}`, { method: 'PATCH', cookie, body: { status: 'measure' } })

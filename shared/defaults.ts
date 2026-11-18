@@ -1,4 +1,4 @@
-import type { CharacterSettings, CompanySettings, GameSettings, PriceList } from './types'
+import type { CharacterSettings, CompanySettings, GameSettings, NotifySettings, PriceList } from './types'
 
 /** Demo values for a fresh instance. Contacts are empty on purpose: no fake phone numbers. */
 export const DEFAULT_COMPANY: CompanySettings = {
@@ -49,6 +49,12 @@ export const DEFAULT_GAME: GameSettings = {
   bonusAmount: 500,
   validDays: 90,
   minNextOrder: 15000,
+}
+
+export const DEFAULT_NOTIFY: NotifySettings = {
+  enabled: false,
+  telegramChatId: '',
+  includeContacts: true,
 }
 
 export const DEFAULT_CHARACTERS: CharacterSettings = {
